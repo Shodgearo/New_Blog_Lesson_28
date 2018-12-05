@@ -8,5 +8,11 @@ get '/' do
 end
 
 get '/new' do
-	erb :new
+  erb :new
+end
+
+post '/new' do
+  area = params[:area]
+
+  erb "#{area}"
 end

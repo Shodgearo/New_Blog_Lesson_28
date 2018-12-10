@@ -17,7 +17,7 @@ configure do
   init_db
   @db.execute 'CREATE TABLE IF NOT EXISTS `Posts` (
 	  `id`	INTEGER PRIMARY KEY AUTOINCREMENT,
-	  `Create` Date	TEXT,
+	  `Create_Date`	TEXT,
 	  `Content`	TEXT
   )'
 end
@@ -37,6 +37,8 @@ post '/new' do
     @error = 'Введите текст поста.'
     return erb :new
   end
+
+  @db.execute 'insert into Posts (create_date, content) values(datetime(), ?);', [area]
 
   erb "Вы ввели: #{area}"
 end

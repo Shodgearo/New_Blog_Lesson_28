@@ -44,5 +44,6 @@ post '/new' do
   #сохранение данных в бд
   @db.execute 'insert into Posts (create_date, content) values(datetime(), ?);', [area]
 
-  erb "Вы ввели: #{area}"
+  #Перенаправление на главную страницу
+  redirect to '/'
 end

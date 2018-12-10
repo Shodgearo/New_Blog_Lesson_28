@@ -6,7 +6,11 @@
   <p>
     <%= post['Content'] %>
     <br>
+    <br>
     Добавлено в: <%= post['Create_Date'] %>
+    <br>
+    <br>
+    <a href="/post/<%= post['id'] %>">Комментарии</a>
   </p>
   <hr />
 <%end %>

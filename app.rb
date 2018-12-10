@@ -2,6 +2,16 @@
 require 'rubygems'
 require 'sinatra'
 require 'sinatra/reloader'
+require 'sqlite3'
+
+def init_db
+  @db = SQLite3::Database.new 'astroblog'
+  @db.results_as_hash = true
+end
+
+before do
+  init_db
+end
 
 get '/' do
 	erb "Hello! <a href=\"https://github.com/bootstrap-ruby/sinatra-bootstrap\">Original</a> pattern has been modified for <a href=\"http://rubyschool.us/\">Ruby School</a>"			
@@ -14,5 +24,5 @@ end
 post '/new' do
   area = params[:area]
 
-  erb "#{area}"
+  erb "Вы ввели: #{area}"
 end

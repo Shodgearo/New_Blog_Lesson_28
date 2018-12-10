@@ -33,5 +33,10 @@ end
 post '/new' do
   area = params[:area]
 
+  if area.length <= 0
+    @error = 'Введите текст поста.'
+    return erb :new
+  end
+
   erb "Вы ввели: #{area}"
 end

@@ -76,5 +76,9 @@ post '/details/:post_id' do
   # получаем текст комментария
   content = params[:area]
 
-  erb "You Typed #{content} for post #{post_id}"
+  #сохранение данных в бд
+  @db.execute 'insert into Comments (create_date, content, post_id) values(datetime(), ?, ?);', [content, post_id]
+
+  # Перенаправляем на страницу поста
+  redirect to ('/details/' + post_id)
 end

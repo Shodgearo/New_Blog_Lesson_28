@@ -18,7 +18,8 @@ configure do
   @db.execute 'CREATE TABLE IF NOT EXISTS `Posts` (
 	  `id`	INTEGER PRIMARY KEY AUTOINCREMENT,
 	  `Create_Date`	TEXT,
-	  `Content`	TEXT
+	  `Content`	TEXT,
+    `Author` TEXT
   )'
 
   @db.execute 'CREATE TABLE IF NOT EXISTS `Comments` (
@@ -42,6 +43,7 @@ end
 
 post '/new' do
   area = params[:area]
+  author = params[:author]
 
   if area.length <= 0
     @error = 'Введите текст поста.'
@@ -49,7 +51,7 @@ post '/new' do
   end
 
   #сохранение данных в бд
-  @db.execute 'insert into Posts (create_date, content) values(datetime(), ?);', [area]
+  @db.execute 'insert into Posts (create_date, content, author) values(datetime(), ?, ?);', [area, author]
 
   #Перенаправление на главную страницу
   redirect to '/'
